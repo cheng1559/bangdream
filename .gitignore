@@ -1,0 +1,45 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments and dependency caches
+.venv/
+venv/
+env/
+.uv-cache/
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+
+# Logs and runtime output
+*.log
+server.out.log
+server.err.log
+
+# Generated screenshots and local captures
+adb-screen*.png
+screenshots/
+
+# Build and packaging output
+build/
+dist/
+*.egg-info/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+
+charts

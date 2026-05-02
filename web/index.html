@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BanG Dream 谱面播放器</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app">
+      <header class="toolbar" aria-label="谱面控制">
+        <div class="brand">
+          <h1>BanG Dream 谱面播放器</h1>
+          <span id="status">等待加载</span>
+        </div>
+
+        <form id="apiForm" class="controls">
+          <label class="song-picker">
+            <span>歌曲</span>
+            <input id="songSearch" name="songSearch" type="search" autocomplete="off" placeholder="搜索歌名 / ID">
+            <select id="songSelect" name="songSelect">
+              <option value="">歌曲列表加载中</option>
+            </select>
+          </label>
+          <label>
+            <span>歌曲 ID</span>
+            <input id="songId" name="songId" type="number" min="1" value="1">
+          </label>
+          <label>
+            <span>难度</span>
+            <select id="difficulty" name="difficulty">
+              <option value="easy">Easy</option>
+              <option value="normal">Normal</option>
+              <option value="hard">Hard</option>
+              <option value="expert" selected>Expert</option>
+              <option value="special">Special</option>
+            </select>
+          </label>
+          <button type="submit" title="从本地 charts 加载">加载谱面</button>
+        </form>
+
+        <div class="controls">
+          <label class="file-button" title="加载本地 JSON 谱面">
+            <input id="fileInput" type="file" accept=".json,application/json">
+            打开 JSON
+          </label>
+          <label>
+            <span>流速</span>
+            <input id="speedScale" type="range" min="42" max="120" value="76">
+          </label>
+          <label>
+            <span>倍速</span>
+            <select id="playbackRate">
+              <option value="0.5">0.5x</option>
+              <option value="0.75">0.75x</option>
+              <option value="1" selected>1.0x</option>
+              <option value="1.25">1.25x</option>
+              <option value="1.5">1.5x</option>
+              <option value="2">2.0x</option>
+            </select>
+          </label>
+          <label>
+            <span>音乐音量</span>
+            <input id="musicVolume" type="range" min="0" max="100" value="80">
+          </label>
+          <label class="toggle">
+            <input id="showBeats" type="checkbox" checked>
+            <span>节拍线</span>
+          </label>
+        </div>
+      </header>
+
+      <section class="summary" aria-label="谱面摘要">
+        <div>
+          <strong id="objectCount">-</strong>
+          <span>对象</span>
+        </div>
+        <div>
+          <strong id="noteCount">-</strong>
+          <span>音符估算</span>
+        </div>
+        <div>
+          <strong id="lastBeat">-</strong>
+          <span>末尾 Beat</span>
+        </div>
+        <div>
+          <strong id="bpm">-</strong>
+          <span>BPM</span>
+        </div>
+      </section>
+
+      <section class="transport" aria-label="播放控制">
+        <button id="playPause" type="button" title="播放或暂停">播放</button>
+        <button id="restart" type="button" title="回到开头">重置</button>
+        <span id="timeReadout">00:00.00 / 00:00.00</span>
+        <span id="audioStatus">音乐未加载</span>
+        <input id="timeline" type="range" min="0" max="0" step="0.01" value="0" aria-label="时间轴">
+      </section>
+
+      <section class="stage" aria-label="下落式谱面画布区域">
+        <div class="legend" aria-label="图例">
+          <span><i class="dot single"></i>Single</span>
+          <span><i class="dot long"></i>Long</span>
+          <span><i class="dot slide"></i>Slide</span>
+          <span><i class="dot flick"></i>Flick</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="chartCanvas"></canvas>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
